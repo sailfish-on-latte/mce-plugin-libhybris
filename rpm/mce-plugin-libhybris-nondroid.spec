@@ -1,6 +1,6 @@
 Name:       mce-plugin-libhybris-nondroid
 Summary:    Libhybris plugin for Mode Control Entity (libhybris-free variant)
-Version:    1.12.3
+Version:    1.14.3
 Release:    1
 Group:      System/System Control
 License:    LGPLv2.1
@@ -13,7 +13,7 @@ Requires(pre):    systemd
 Requires(post):   systemd
 Requires(preun):  systemd
 Requires(postun): systemd
-Provides:         mce-plugin-libhybris
+Provides:         mce-plugin-libhybris = %{version}
 
 BuildRequires:  pkgconfig(glib-2.0) >= 2.18.0
 BuildRequires:  systemd
@@ -32,7 +32,7 @@ make ENABLE_HYBRIS_SUPPORT=n %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
+make install DESTDIR=%{buildroot}  _LIBDIR=%{_libdir}
 # rpm automajick needs +x bits on all elf files after install
 chmod 755 %{buildroot}%{_libdir}/mce/modules/hybris.so
 
